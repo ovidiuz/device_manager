@@ -1,8 +1,8 @@
 package domain
 
 import (
-	validation "github.com/go-ozzo/ozzo-validation"
-	"github.com/go-ozzo/ozzo-validation/is"
+	validation "github.com/go-ozzo/ozzo-validation/v4"
+	"github.com/go-ozzo/ozzo-validation/v4/is"
 )
 
 type BasicAuth struct {
@@ -12,6 +12,7 @@ type BasicAuth struct {
 
 type RegisterRequest struct {
 	BasicAuth
+	PasswordConfirm string `json:"password_confirm" validate:"required" example:"11111111"`
 }
 
 type LoginRequest struct {
@@ -19,9 +20,19 @@ type LoginRequest struct {
 }
 
 func (a *BasicAuth) Validate() error {
-	return validation.ValidateStruct(
-		a,
-		validation.Field(a.Email, is.Email),
-		validation.Field(a.Password, validation.Length(minPasswordLength, 0)),
+	return validation.ValidateStruct(a,
+		validation.Field(&a.Email, is.EmailFormat.Error("email must be a valid email address")),
+		//validation.Field(&a.Email, is.Email.Error("email must be an existing email address")),
+		validation.Field(&a.Password, validation.Length(minPasswordLength, 0).Error("password must have at least 8 characters")),
+	)
+}
+
+func (r *RegisterRequest) Validate() error {
+	if err := r.BasicAuth.Validate(); err != nil {
+		return err
+	}
+
+	return validation.ValidateStruct(r,
+		validation.Field(&r.PasswordConfirm, validation.In(r.Password).Error("passwords do not match")),
 	)
 }

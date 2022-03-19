@@ -4,12 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/ovidiuz/device_manager/domain"
 	"github.com/ovidiuz/device_manager/gateways/api"
 	"github.com/ovidiuz/device_manager/gateways/interfaces"
-	"github.com/ovidiuz/device_manager/gateways/repositories"
-	"github.com/ovidiuz/device_manager/usecases"
 
 	"github.com/sirupsen/logrus"
 )
@@ -24,21 +22,21 @@ func main() {
 		logrus.WithError(err).Fatal("failed to load config")
 	}
 
-	sqlDB, err := initSQL(conf)
-	if err != nil {
-		logrus.WithError(err).Fatal("could not initialize an SQL connection")
-	}
+	//sqlDB, err := initSQL(conf)
+	//if err != nil {
+	//	logrus.WithError(err).Fatal("could not initialize an SQL connection")
+	//}
 
-	// init repos
-	userSQLRepo := repositories.NewUserSQLRepo(sqlDB)
-
-	// init managers
-	userManager := usecases.NewUserManager(userSQLRepo)
+	//// init repos
+	//userSQLRepo := repositories.NewUserSQLRepo(sqlDB)
+	//
+	//// init managers
+	//userManager := usecases.NewUserManager(userSQLRepo)
 
 	// init API route handlers
 	apiRouteHandlers := []interfaces.RouteHandler{
-		api.NewAuthHandler(userManager),
-		api.NewUserHandler(userManager),
+		api.NewAuthHandler(nil),
+		api.NewUserHandler(nil),
 	}
 
 	// setup & start the HTTP server
