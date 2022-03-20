@@ -1,17 +1,20 @@
 package api
 
 import (
+	"github.com/casbin/casbin/v2"
 	"github.com/labstack/echo/v4"
 	"github.com/ovidiuz/device_manager/usecases"
 )
 
 type UserHandler struct {
 	userManager *usecases.UserManager
+	enforcer    casbin.IEnforcer
 }
 
-func NewUserHandler(userManager *usecases.UserManager) *UserHandler {
+func NewUserHandler(userManager *usecases.UserManager, enforcer casbin.IEnforcer) *UserHandler {
 	return &UserHandler{
 		userManager: userManager,
+		enforcer:    enforcer,
 	}
 }
 

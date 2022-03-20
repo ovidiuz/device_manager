@@ -5,6 +5,8 @@ import (
 	"github.com/go-ozzo/ozzo-validation/v4/is"
 )
 
+type Role string
+
 type BasicAuth struct {
 	Email    string `json:"email" validate:"required" example:"john.doe@example.com"`
 	Password string `json:"password" validate:"required" example:"11111111"`

@@ -4,6 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
+	sqlxadapter "github.com/Blank-Xu/sqlx-adapter"
+	"github.com/casbin/casbin/v2"
+	"github.com/jmoiron/sqlx"
+
 	"github.com/labstack/echo/v4"
 	"github.com/ovidiuz/device_manager/domain"
 	"github.com/ovidiuz/device_manager/gateways/api"
@@ -33,10 +37,13 @@ func main() {
 	//// init managers
 	//userManager := usecases.NewUserManager(userSQLRepo)
 
+	//// init Cabin RBAC Policy Management
+	//casbinEnforcer := initCasbin(conf, sqlDB)
+
 	// init API route handlers
 	apiRouteHandlers := []interfaces.RouteHandler{
-		api.NewAuthHandler(nil),
-		api.NewUserHandler(nil),
+		api.NewAuthHandler(nil, nil),
+		api.NewUserHandler(nil, nil),
 	}
 
 	// setup & start the HTTP server
@@ -56,4 +63,18 @@ func startHTTPServer(port int, routeHandlers []interfaces.RouteHandler) {
 
 	// will probably very rarely reach this log statement
 	logrus.Info("HTTP server gracefully shut down")
+}
+
+func initCasbin(conf *domain.ServiceConfig, db *sqlx.DB) casbin.IEnforcer {
+	adapter, err := sqlxadapter.NewAdapter(db, conf.CasbinTableName)
+	if err != nil {
+		logrus.WithError(err).Fatal("could not create Casbin Sqlx adapter")
+	}
+
+	enforcer, err := casbin.NewEnforcer(conf.CasbinModelFile, adapter)
+	if err != nil {
+		logrus.WithError(err).Fatal("could not create Casbin enforcer")
+	}
+
+	return enforcer
 }

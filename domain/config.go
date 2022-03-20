@@ -3,7 +3,9 @@ package domain
 import "github.com/Netflix/go-env"
 
 type ServiceConfig struct {
-	ServicePort int `env:"SERVICE_PORT,default=8080"`
+	ServicePort     int    `env:"SERVICE_PORT,default=8080"`
+	CasbinTableName string `env:"CASBIN_TABLE_NAME,default=casbin_rule"`
+	CasbinModelFile string `env:"CASBIN_MODEL_FILE,default=config/rbac_model.con"`
 	PostgreSQLConfig
 }
 

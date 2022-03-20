@@ -5,3 +5,8 @@ const (
 
 	PasswordCost = 14
 )
+
+const (
+	UserRole  Role = "user"
+	AdminRole Role = "admin"
+)

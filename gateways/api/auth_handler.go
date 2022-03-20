@@ -4,6 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/casbin/casbin/v2"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/labstack/echo/v4"
@@ -13,11 +15,13 @@ import (
 
 type AuthHandler struct {
 	userManager *usecases.UserManager
+	enforcer    casbin.IEnforcer
 }
 
-func NewAuthHandler(userManager *usecases.UserManager) *AuthHandler {
+func NewAuthHandler(userManager *usecases.UserManager, enforcer casbin.IEnforcer) *AuthHandler {
 	return &AuthHandler{
 		userManager: userManager,
+		enforcer:    enforcer,
 	}
 }
 

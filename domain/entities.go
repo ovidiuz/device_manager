@@ -8,5 +8,6 @@ type Device struct {
 type User struct {
 	UserID   string `json:"user_id" db:"user_id"`
 	Email    string `json:"email" db:"email"`
+	Role     Role   `json:"role"`
 	Password string `json:"-" db:"password"`
 }
