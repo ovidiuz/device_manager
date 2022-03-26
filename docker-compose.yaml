@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+#  device_manager:
+#    build: .
+#    ports:
+#      - 8080:8080
+#    environment:
+#      SERVICE_PORT: 8080
+#      PSQL_HOST: postgresql
+#    networks:
+#      device-manager-postgresql-network:
+
+  postgresql:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: db1
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - 5432:5432
+    volumes:
+      - psql_data:/var/lib/postgresql/data
+#    networks:
+#      device-manager-postgresql-network:
+
+networks:
+  device-manager-postgresql-network:
+
+volumes:
+  psql_data:

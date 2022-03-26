@@ -1,37 +1,36 @@
 package api
 
 import (
-	"github.com/casbin/casbin/v2"
 	"github.com/labstack/echo/v4"
 	"github.com/ovidiuz/device_manager/usecases"
 )
 
 type UserHandler struct {
+	middleware  []echo.MiddlewareFunc
 	userManager *usecases.UserManager
-	enforcer    casbin.IEnforcer
 }
 
-func NewUserHandler(userManager *usecases.UserManager, enforcer casbin.IEnforcer) *UserHandler {
+func NewUserHandler(userManager *usecases.UserManager, middleware []echo.MiddlewareFunc) *UserHandler {
 	return &UserHandler{
+		middleware:  middleware,
 		userManager: userManager,
-		enforcer:    enforcer,
 	}
 }
 
-func (u *UserHandler) RegisterRoutes(ws *echo.Echo) {
-	ws.GET("/users/:id", u.getUser)
-	ws.PUT("/users/:id", u.updateUser)
-	ws.DELETE("/users/:id", u.deleteUser)
+func (h *UserHandler) RegisterRoutes(ws *echo.Echo) {
+	ws.GET("/users/:id", h.getUser, h.middleware...)
+	ws.PUT("/users/:id", h.updateUser, h.middleware...)
+	ws.DELETE("/users/:id", h.deleteUser, h.middleware...)
 }
 
-func (u *UserHandler) getUser(ctx echo.Context) error {
+func (h *UserHandler) getUser(ctx echo.Context) error {
 	panic("implement me")
 }
 
-func (u *UserHandler) updateUser(ctx echo.Context) error {
+func (h *UserHandler) updateUser(ctx echo.Context) error {
 	panic("implement me")
 }
 
-func (u *UserHandler) deleteUser(ctx echo.Context) error {
+func (h *UserHandler) deleteUser(ctx echo.Context) error {
 	panic("implement me")
 }

@@ -10,3 +10,12 @@ const (
 	UserRole  Role = "user"
 	AdminRole Role = "admin"
 )
+
+const (
+	JWT = "jwt"
+)
+
+const (
+	// Echo context keys
+	UserKey = "user"
+)

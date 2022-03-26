@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	sqlxadapter "github.com/Blank-Xu/sqlx-adapter"
+	"github.com/ovidiuz/device_manager/gateways/repositories"
+	"github.com/ovidiuz/device_manager/usecases"
+
 	"github.com/casbin/casbin/v2"
 	"github.com/jmoiron/sqlx"
 
@@ -26,24 +28,26 @@ func main() {
 		logrus.WithError(err).Fatal("failed to load config")
 	}
 
-	//sqlDB, err := initSQL(conf)
-	//if err != nil {
-	//	logrus.WithError(err).Fatal("could not initialize an SQL connection")
-	//}
+	sqlDB, err := initSQL(conf)
+	if err != nil {
+		logrus.WithError(err).Fatal("could not initialize an SQL connection")
+	}
 
-	//// init repos
-	//userSQLRepo := repositories.NewUserSQLRepo(sqlDB)
-	//
-	//// init managers
-	//userManager := usecases.NewUserManager(userSQLRepo)
+	// init repos
+	userSQLRepo := repositories.NewUserSQLRepo(sqlDB)
 
-	//// init Cabin RBAC Policy Management
-	//casbinEnforcer := initCasbin(conf, sqlDB)
+	// init Cabin RBAC Policy Management
+	casbinEnforcer := initCasbin(conf, sqlDB)
+
+	// init managers
+	userManager := usecases.NewUserManager(userSQLRepo, casbinEnforcer, conf.JwtTTL)
 
 	// init API route handlers
+	authHandler := api.NewAuthHandler(userManager, conf.JwtTTL, conf.HTTPSEnabled)
+	userHandler := api.NewUserHandler(userManager, authHandler.GetAuthMiddleware())
 	apiRouteHandlers := []interfaces.RouteHandler{
-		api.NewAuthHandler(nil, nil),
-		api.NewUserHandler(nil, nil),
+		authHandler,
+		userHandler,
 	}
 
 	// setup & start the HTTP server
@@ -52,6 +56,7 @@ func main() {
 
 func startHTTPServer(port int, routeHandlers []interfaces.RouteHandler) {
 	ws := echo.New()
+	ws.HTTPErrorHandler = customHTTPErrorHandler(ws)
 	for _, handler := range routeHandlers {
 		handler.RegisterRoutes(ws)
 	}
@@ -66,15 +71,41 @@ func startHTTPServer(port int, routeHandlers []interfaces.RouteHandler) {
 }
 
 func initCasbin(conf *domain.ServiceConfig, db *sqlx.DB) casbin.IEnforcer {
-	adapter, err := sqlxadapter.NewAdapter(db, conf.CasbinTableName)
-	if err != nil {
-		logrus.WithError(err).Fatal("could not create Casbin Sqlx adapter")
-	}
+	//adapter, err := sqlxadapter.NewAdapter(db, conf.CasbinTableName)
+	//if err != nil {
+	//	logrus.WithError(err).Fatal("could not create Casbin Sqlx adapter")
+	//}
+	//
+	//enforcer, err := casbin.NewEnforcer(conf.CasbinModelFile, adapter)
+	//if err != nil {
+	//	logrus.WithError(err).Fatal("could not create Casbin enforcer")
+	//}
+	//
+	//return enforcer
+	return nil
+}
 
-	enforcer, err := casbin.NewEnforcer(conf.CasbinModelFile, adapter)
-	if err != nil {
-		logrus.WithError(err).Fatal("could not create Casbin enforcer")
-	}
+func customHTTPErrorHandler(ws *echo.Echo) func(err error, ctx echo.Context) {
+	return func(err error, ctx echo.Context) {
+		defer func() {
+			ws.DefaultHTTPErrorHandler(err, ctx)
+		}()
 
-	return enforcer
+		if err == nil {
+			return
+		}
+		_, ok := err.(*echo.HTTPError)
+		if ok {
+			return
+		}
+
+		switch err {
+		case domain.ErrNotFound:
+			err = echo.ErrNotFound
+		case domain.ErrUnauthorized:
+			err = echo.ErrUnauthorized
+		default:
+			err = echo.ErrInternalServerError
+		}
+	}
 }

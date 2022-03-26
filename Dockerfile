@@ -1,4 +1,6 @@
-FROM golang:1.15-alpine
+FROM golang:1.18-alpine
+
+RUN apk update && apk add git
 
 WORKDIR /app
 
@@ -8,6 +10,6 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o main
+RUN go build -o service
 
-CMD ["./main"]
+CMD ["./service"]

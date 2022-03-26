@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"context"
+	"database/sql"
 
 	"github.com/ovidiuz/device_manager/domain"
 	"github.com/sirupsen/logrus"
@@ -14,7 +15,7 @@ import (
 const (
 	getUserStmt        = "SELECT * FROM users WHERE user_id=$1"
 	getUserByEmailStmt = "SELECT * FROM users WHERE email=$1"
-	saveUserStmt       = "INSERT INTO users (email, password) VALUES (:email, :password)"
+	saveUserStmt       = "INSERT INTO users (email, role, password) VALUES (:email, :role, :password)"
 	deleteUserStmt     = "DELETE FROM users WHERE email=$1"
 )
 
@@ -28,11 +29,14 @@ func NewUserSQLRepo(db *sqlx.DB) *UserSQLRepo {
 	}
 }
 
-func (r *UserSQLRepo) GetUser(ctx context.Context, userId string) (*domain.User, error) {
+func (r *UserSQLRepo) GetUser(ctx context.Context, userID string) (*domain.User, error) {
 	user := &domain.User{}
-	err := r.db.GetContext(ctx, user, getUserStmt, userId)
-	if err != nil {
-		logrus.WithContext(ctx).WithError(err).Errorf("could not get user=%s", userId)
+	err := r.db.GetContext(ctx, user, getUserStmt, userID)
+	if err == sql.ErrNoRows {
+		logrus.WithContext(ctx).Debugf("user=%s does not exist", userID)
+		return nil, domain.ErrNotFound
+	} else if err != nil {
+		logrus.WithContext(ctx).WithError(err).Errorf("could not get user=%s", userID)
 		return nil, err
 	}
 	return user, nil
@@ -41,7 +45,10 @@ func (r *UserSQLRepo) GetUser(ctx context.Context, userId string) (*domain.User,
 func (r *UserSQLRepo) GetUserByEmail(ctx context.Context, email string) (*domain.User, error) {
 	user := &domain.User{}
 	err := r.db.GetContext(ctx, user, getUserByEmailStmt, email)
-	if err != nil {
+	if err == sql.ErrNoRows {
+		logrus.WithContext(ctx).Debugf("user with email=%s does not exist", email)
+		return nil, domain.ErrNotFound
+	} else if err != nil {
 		logrus.WithContext(ctx).WithError(err).Errorf("could not get user with email=%s", email)
 		return nil, err
 	}
