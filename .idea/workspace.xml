@@ -5,25 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cf4331-32c4-49f7-9b27-4bf5f63575b9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/auth/jwt.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/rbac_model.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/errors.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/api_constants.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/constants.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/api_errors.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/entities.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateways/api/auth_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateways/api/auth_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateways/api/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateways/api/middleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateways/api/user_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateways/api/user_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateways/repositories/user_sql_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateways/repositories/user_sql_repo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql_init.go" beforeDir="false" afterPath="$PROJECT_DIR$/sql_init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usecases/user_manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/usecases/user_manager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/rbac_model.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/api_types.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/config.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/constants.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/entities.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/errors.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateways/api/admin_handler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateways/api/auth_handler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateways/api/user_handler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateways/interfaces/route_handler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateways/interfaces/user_repo.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateways/repositories/user_sql_repo.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwt/jwt.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/query_service/domain/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/query_service/domain/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/query_service/gateways/interfaces/metrics_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/query_service/gateways/interfaces/metrics_repo.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/query_service/gateways/repositories/metrics_influx_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/query_service/gateways/repositories/metrics_influx_repo.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/query_service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/query_service/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_init.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usecases/user_manager.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +46,7 @@
   </component>
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/query_service" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -53,16 +60,16 @@
     <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/gateways/repositories/user_sql_repo.go" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/query_service/gateways/interfaces/metrics_repo.go" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/device_manager/service.go" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/query_service/gateways/repositories/metrics_influx_repo.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/go/pkg/mod/github.com/labstack/echo/v4@v4.7.2/echo.go" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/service.go" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/gateways/api/auth_handler.go" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/gateways/interfaces/route_handler.go" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/go.mod" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/query_service/go.mod" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/go/pkg/mod/github.com/golang-jwt/jwt@v3.2.2+incompatible/parser.go" root0="SKIP_INSPECTION" />
     <setting file="file://$USER_HOME$/go/pkg/mod/github.com/casbin/casbin/v2@v2.42.0/enforcer.go" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/usecases/user_manager.go" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/config/rbac_model.conf" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/sql_init.go" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/go/pkg/mod/github.com/golang-jwt/jwt@v3.2.2+incompatible/token.go" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/query_service/domain/config.go" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/go/pkg/mod/github.com/golang-jwt/jwt@v3.2.2+incompatible/claims.go" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -87,7 +94,7 @@
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -96,7 +103,7 @@
       <recent name="$PROJECT_DIR$/gateways/repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/ovidiuz/device_manager">
+  <component name="RunManager" selected="Go Build.go build github.com/ovidiuz/query_service">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="device_manager" />
       <working_directory value="$PROJECT_DIR$" />
@@ -124,6 +131,15 @@
       <filePath value="$PROJECT_DIR$/service.go" />
       <method v="2" />
     </configuration>
+    <configuration name="go build github.com/ovidiuz/query_service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="device_manager" />
+      <working_directory value="$PROJECT_DIR$/query_service" />
+      <kind value="PACKAGE" />
+      <package value="github.com/ovidiuz/query_service" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/query_service/service.go" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="device_manager" />
       <working_directory value="$PROJECT_DIR$" />
@@ -144,6 +160,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/ovidiuz/query_service" />
         <item itemvalue="Go Build.go build github.com/ovidiuz/device_manager" />
         <item itemvalue="Docker..Dockerfile" />
         <item itemvalue="Go Build.go build device_manager" />
@@ -172,19 +189,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/gateways/api/auth_handler.go</url>
-          <line>60</line>
-          <option name="timeStamp" value="18" />
+          <url>file://$PROJECT_DIR$/gateways/api/user_handler.go</url>
+          <line>26</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/service.go</url>
-          <line>91</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/gateways/api/auth_handler.go</url>
-          <line>64</line>
-          <option name="timeStamp" value="24" />
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/golang-jwt/jwt@v3.2.2+incompatible/claims.go</url>
+          <line>37</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
