@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ovidiuz/device_manager/jwt"
+	"github.com/labstack/echo"
+	"github.com/ovidiuz/device_manager/device_manager/jwt"
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/labstack/echo/v4"
-	"github.com/ovidiuz/device_manager/domain"
-	"github.com/ovidiuz/device_manager/usecases"
+	"github.com/ovidiuz/device_manager/device_manager/domain"
+	"github.com/ovidiuz/device_manager/device_manager/usecases"
 )
 
 type AuthHandler struct {

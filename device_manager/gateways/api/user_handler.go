@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/labstack/echo/v4"
-	"github.com/ovidiuz/device_manager/usecases"
+	"github.com/labstack/echo"
+	"github.com/ovidiuz/device_manager/device_manager/usecases"
 )
 
 type UserHandler struct {

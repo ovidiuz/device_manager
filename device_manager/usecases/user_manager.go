@@ -4,16 +4,15 @@ import (
 	"context"
 	"time"
 
-	"github.com/ovidiuz/device_manager/jwt"
-
 	"github.com/casbin/casbin/v2"
+	"github.com/ovidiuz/device_manager/device_manager/jwt"
 
 	"github.com/sirupsen/logrus"
 
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/ovidiuz/device_manager/domain"
-	"github.com/ovidiuz/device_manager/gateways/interfaces"
+	"github.com/ovidiuz/device_manager/device_manager/domain"
+	"github.com/ovidiuz/device_manager/device_manager/gateways/interfaces"
 )
 
 type UserManager struct {

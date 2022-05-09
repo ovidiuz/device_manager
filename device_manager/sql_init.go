@@ -9,7 +9,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"github.com/ovidiuz/device_manager/domain"
+	"github.com/ovidiuz/device_manager/device_manager/domain"
 )
 
 const (

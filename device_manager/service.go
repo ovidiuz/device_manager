@@ -4,16 +4,16 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/ovidiuz/device_manager/gateways/repositories"
-	"github.com/ovidiuz/device_manager/usecases"
-
 	"github.com/casbin/casbin/v2"
+	"github.com/labstack/echo"
+	"github.com/ovidiuz/device_manager/device_manager/gateways/repositories"
+	"github.com/ovidiuz/device_manager/device_manager/usecases"
+
 	"github.com/jmoiron/sqlx"
 
-	"github.com/labstack/echo/v4"
-	"github.com/ovidiuz/device_manager/domain"
-	"github.com/ovidiuz/device_manager/gateways/api"
-	"github.com/ovidiuz/device_manager/gateways/interfaces"
+	"github.com/ovidiuz/device_manager/device_manager/domain"
+	"github.com/ovidiuz/device_manager/device_manager/gateways/api"
+	"github.com/ovidiuz/device_manager/device_manager/gateways/interfaces"
 
 	"github.com/sirupsen/logrus"
 )

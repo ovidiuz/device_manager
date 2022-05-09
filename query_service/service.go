@@ -1,13 +1,14 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
+	"github.com/gofiber/fiber/v2"
 	influx "github.com/influxdata/influxdb-client-go/v2"
-	"github.com/ovidiuz/query_service/domain"
-	"github.com/ovidiuz/query_service/gateways/interfaces"
-	"github.com/ovidiuz/query_service/gateways/repositories"
+	"github.com/ovidiuz/device_manager/query_service/domain"
+	"github.com/ovidiuz/device_manager/query_service/gateways/api"
+	"github.com/ovidiuz/device_manager/query_service/gateways/interfaces"
+	"github.com/ovidiuz/device_manager/query_service/gateways/repositories"
 	"github.com/sirupsen/logrus"
 )
 
@@ -22,14 +23,15 @@ func main() {
 	}
 
 	metricsRepo := initMetricsRepo(conf)
+	metricsHandler := api.NewMetricsHandler(metricsRepo)
 
-	ctx := context.Background()
-	results, err := metricsRepo.GetAllMeasurements(ctx)
-	if err != nil {
+	ws := fiber.New()
+	metricsHandler.RegisterRoutes(ws)
+
+	listenAddr := fmt.Sprintf(":%d", conf.WebServicePort)
+	if err := ws.Listen(listenAddr); err != nil {
 		panic(err)
 	}
-
-	fmt.Println(results)
 }
 
 func initMetricsRepo(conf *domain.ServiceConfig) interfaces.MetricsRepo {

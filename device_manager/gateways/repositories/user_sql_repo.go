@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/ovidiuz/device_manager/domain"
+	"github.com/ovidiuz/device_manager/device_manager/domain"
 	"github.com/sirupsen/logrus"
 
 	"github.com/jmoiron/sqlx"

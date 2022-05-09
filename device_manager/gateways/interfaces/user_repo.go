@@ -3,7 +3,7 @@ package interfaces
 import (
 	"context"
 
-	"github.com/ovidiuz/device_manager/domain"
+	"github.com/ovidiuz/device_manager/device_manager/domain"
 )
 
 type UserRepo interface {

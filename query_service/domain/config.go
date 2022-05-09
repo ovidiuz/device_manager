@@ -3,6 +3,7 @@ package domain
 import "github.com/Netflix/go-env"
 
 type ServiceConfig struct {
+	WebServicePort int `env:"WEB_SERVICE_PORT,default=8000"`
 	InfluxConfig
 }
 
